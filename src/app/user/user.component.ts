@@ -1,4 +1,4 @@
-import { Component, computed, signal } from '@angular/core';
+import { Component, computed, input, signal } from '@angular/core';
 import { DUMMY_USERS } from './dummy-users';
 
 const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
@@ -12,9 +12,13 @@ const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
 })
 export class UserComponent {
   // selectedUser = DUMMY_USERS[randomIndex];
-  selectedUser = signal(DUMMY_USERS[randomIndex]);
-  imagePath = computed( () => 'assets/users/' + this.selectedUser().avatar);
+  avator = input.required<string>();
+  name = input.required<string>();
+  imagePath = computed( () => 'assets/users/' + this.avator());
 
+  // Opt_1: The following 4 lines are used to demo random info on button click
+  // selectedUser = signal(DUMMY_USERS[randomIndex]);
+  // imagePath = computed( () => 'assets/users/' + this.selectedUser().avatar);
   // get imagePath() {
   //   return 'assets/users/' + this.selectedUser.avatar
   // }
@@ -22,7 +26,8 @@ export class UserComponent {
   onSelectUser(){
     console.log("Click a button !!");
     const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    // this.selectedUser=DUMMY_USERS[randomIndex];
-    this.selectedUser.set(DUMMY_USERS[randomIndex]);
+    
+    // Opt_1
+    // this.selectedUser.set(DUMMY_USERS[randomIndex]);
   }
 }
