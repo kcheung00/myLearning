@@ -13,8 +13,11 @@ import { TaskComponent } from "./task/task.component";
 })
 export class AppComponent {
   users = DUMMY_USERS; // expose user to all components
-  selectedUserId = 'u1';
+  
+  // selectedUserId = 'u1'; <--- this line is good. Learning
+  selectedUserId?: string; // <--- this can be null
 
+  // return selected user object
   get selectedUser(){
     return this.users.find( (user) => user.id === this.selectedUserId )!;
   }

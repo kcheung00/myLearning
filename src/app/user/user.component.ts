@@ -1,7 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { DUMMY_USERS } from './dummy-users';
-
-// const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
+// import { DUMMY_USERS } from './dummy-users';
+import { User } from './user.model';
 
 @Component({
   selector: 'app-user',
@@ -11,24 +10,18 @@ import { DUMMY_USERS } from './dummy-users';
   styleUrl: './user.component.css'
 })
 export class UserComponent {
-  // selectedUser = DUMMY_USERS[randomIndex];
-  // selectedUser = signal(DUMMY_USERS[randomIndex]);
-  // imagePath = computed( () => 'assets/users/' + this.selectedUser().avatar);
-  @Input({required:true}) id!:string;
-  @Input({required:true}) avatar!: string;
-  @Input({required:true}) name!: string;
+
+  // Create object type user. Not an object, just object type
+  @Input({required: true}) objTy_User!:User;
+  @Input({required: true}) selected_User!: boolean;
   @Output() select = new EventEmitter<string>();
 
   get imagePath() {
-    return 'assets/users/' + this.avatar;
+    return 'assets/users/' + this.objTy_User.avatar;
   }
 
   onSelectUser(){
     console.log("Click a button !!");
-
-    this.select.emit(this.id);
-    // const randomIndex = Math.floor(Math.random() * DUMMY_USERS.length);
-    // this.selectedUser=DUMMY_USERS[randomIndex];
-    // this.selectedUser.set(DUMMY_USERS[randomIndex]);
+    this.select.emit(this.objTy_User.id);
   }
 }
