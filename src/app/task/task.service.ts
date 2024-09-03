@@ -6,7 +6,12 @@ import { NewItemData } from './new-item/new-item.model';
 })
 export class TaskService {
 
-  constructor() { }
+  constructor() { 
+    const items = localStorage.getItem('items');
+    if( items ){
+      this.tasks = JSON.parse(items);
+    }
+  }
 
   private tasks = [
     {
@@ -34,6 +39,10 @@ export class TaskService {
     }
   ];
 
+  private saveItems(){
+    localStorage.setItem('items', JSON.stringify(this.tasks));
+  }
+
   getUserItems(uid: string){
     return this.tasks.filter((userItem) => userItem.userId === uid);
   }
@@ -46,9 +55,11 @@ export class TaskService {
       summary: itemData.summary,
       dueDate: itemData.date,
     })
+    this.saveItems();
   }
 
   removeItem(completed_id: string){
     this.tasks = this.tasks.filter( (uItem) => uItem.id !== completed_id);
+    this.saveItems();
   }
 }
