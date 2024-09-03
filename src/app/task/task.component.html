@@ -1,13 +1,13 @@
 @if (isAddingItem) {
     console.log("isAddingItem = " + isAddingItem)
-    <app-new-item (cancelItem)="onCancelAddItem()"></app-new-item>
+    <app-new-item (cancelItem)="onCancelAddItem()" (addItem)="onAddItem($event)"></app-new-item>
 }
 
 <section id="tasks">
     <header>
         <h2>{{name}}'s Items</h2>
         <menu>
-            <button (click)="onStartAddItem()">Add Task</button>
+            <button (click)="onStartAddItem()">Add Item</button>
         </menu>
     </header>
 
