@@ -1,16 +1,19 @@
 import { Component, Input } from '@angular/core';
 import { ItemComponent } from "./item/item.component";
+import { NewItemComponent } from "./new-item/new-item.component";
 
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [ItemComponent],
+  imports: [ItemComponent, NewItemComponent],
   templateUrl: './task.component.html',
   styleUrl: './task.component.css'
 })
 export class TaskComponent {
   @Input({required: true}) sel_uid!: string;
   @Input({required: true}) name!: string;
+
+  isAddingItem = false;
 
   tasks = [
     {
@@ -39,11 +42,20 @@ export class TaskComponent {
   ];
 
   get selectedUserTasks(){
-    return this.tasks.filter((utask) => utask.userId === this.sel_uid);
+    return this.tasks.filter((userItem) => userItem.userId === this.sel_uid);
   }
 
-  onCompleteTask(completed_id:string){
-    this.tasks = this.tasks.filter( (task) => task.id !== completed_id);
+  onCompleteItem(completed_id:string){
+    this.tasks = this.tasks.filter( (uItem) => uItem.id !== completed_id);
     //....
+  }
+
+  onStartAddItem(){
+    this.isAddingItem = true;
+  }
+
+  onCancelAddItem(){
+    console.log("task.component.ts : onCancelAddItem() - isAddingItem = " + this.isAddingItem);
+    this.isAddingItem = false;
   }
 }

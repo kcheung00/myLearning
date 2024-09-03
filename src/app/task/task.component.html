@@ -1,15 +1,20 @@
+@if (isAddingItem) {
+    console.log("isAddingItem = " + isAddingItem)
+    <app-new-item (cancelItem)="onCancelAddItem()"></app-new-item>
+}
+
 <section id="tasks">
     <header>
         <h2>{{name}}'s Items</h2>
         <menu>
-            <button>Add Task</button>
+            <button (click)="onStartAddItem()">Add Task</button>
         </menu>
     </header>
 
     <ul>
         @for (local_item of selectedUserTasks; track local_item.id) {
             <li>
-                <app-item [myItem]="local_item" (complete)="onCompleteTask($event)"></app-item>
+                <app-item [myItem]="local_item" (complete)="onCompleteItem($event)"></app-item>
             </li>
         }
     </ul>
