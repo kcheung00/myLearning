@@ -1,6 +1,7 @@
-import { Component, EventEmitter, Output, signal } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { type NewItemData } from './new-item.model';
+import { TaskService } from '../task.service';
 
 @Component({
   selector: 'app-new-item',
@@ -10,12 +11,16 @@ import { type NewItemData } from './new-item.model';
   styleUrl: './new-item.component.css'
 })
 export class NewItemComponent {
+  @Input( {required: true} ) sel_userId!: string;
   @Output() cancelItem = new EventEmitter<void>();
-  // @Output() addItem = new EventEmitter<{title: string; summary: string; date:string}>
-  @Output() addItem = new EventEmitter<NewItemData>();
+  
+  // No need for the emit event due to the injection
+  // @Output() addItem = new EventEmitter<NewItemData>();
   enteredTitle = "";
   enteredSummary = '';
   enteredDate = "";
+
+  private taskService = inject(TaskService);
 
   // For signal example, use the following & import signal. No other changes need
   // enteredTitle = signal('');
@@ -29,10 +34,20 @@ export class NewItemComponent {
 
   // The following function is used to bypass submit to backend service.
   onLocalSubmit(){
-    this.addItem.emit({
-      title: this.enteredTitle,
-      summary: this.enteredSummary,
-      date: this.enteredDate
-    });
+    this.taskService.addItem(
+      {
+        title: this.enteredTitle,
+        summary: this.enteredSummary,
+        date: this.enteredDate,
+    },
+    this.sel_userId
+  );
+  this.cancelItem.emit();
+    // Replace the following with inject service
+    // this.addItem.emit({
+    //   title: this.enteredTitle,
+    //   summary: this.enteredSummary,
+    //   date: this.enteredDate
+    // });
   }
 }

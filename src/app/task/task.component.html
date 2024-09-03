@@ -1,6 +1,6 @@
 @if (isAddingItem) {
     console.log("isAddingItem = " + isAddingItem)
-    <app-new-item (cancelItem)="onCancelAddItem()" (addItem)="onAddItem($event)"></app-new-item>
+    <app-new-item [sel_userId]="sel_uid" (cancelItem)="onCancelAddItem()"></app-new-item>
 }
 
 <section id="tasks">
