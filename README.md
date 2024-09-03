@@ -1,6 +1,7 @@
 # Essentials
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 17.1.2.
+This is the basic completed app without any ng-content. This app contains button, button event, bypass submit to remote backend service, using local angular to handle submit request locally.
 
 ## Development server
 
