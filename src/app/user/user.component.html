@@ -1,3 +1,13 @@
+<app-card>
+    <button [class.active]="selected_User" (click)="onSelectUser()">
+        <img 
+            [src]="imagePath"
+            [alt]="objTy_User.name"/>
+        <span>{{ objTy_User.name }}</span>
+    </button>
+</app-card>
+
+<!--
 <div>
     <button [class.active]="selected_User" (click)="onSelectUser()">
         <img 
@@ -6,3 +16,4 @@
         <span>{{ objTy_User.name }}</span>
     </button>
 </div>
+-->

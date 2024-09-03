@@ -1,10 +1,12 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import {Item} from './item.model';
+import { DatePipe } from '@angular/common';
+import { type Item } from './item.model';
+import { CardComponent } from "../../shared/card/card.component";
 
 @Component({
   selector: 'app-item',
   standalone: true,
-  imports: [],
+  imports: [CardComponent, DatePipe],
   templateUrl: './item.component.html',
   styleUrl: './item.component.css'
 })

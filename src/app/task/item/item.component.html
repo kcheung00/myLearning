@@ -1,8 +1,11 @@
-<article>
-    <h2>{{myItem.title}}</h2>
-    <time>{{myItem.dueDate}}</time>
-    <p>{{myItem.summary}}</p>
-    <p class="actions">
-        <button (click)="onCompleteItem()">Complete</button>
-    </p>
-</article>
+
+<app-card>
+    <article>
+        <h2>{{myItem.title}}</h2>
+        <time>{{myItem.dueDate | date:'short' }}</time>
+        <p>{{myItem.summary}}</p>
+        <p class="actions">
+            <button (click)="onCompleteItem()">Complete</button>
+        </p>
+    </article>
+</app-card>
